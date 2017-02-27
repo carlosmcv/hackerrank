@@ -12,7 +12,7 @@ public class Pangrams {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String s = in.next();
+        String s = in.nextLine();
 
         //String s = "We promptly judged antique ivory buckles for the next prize";
         //String s = "We promptly judged antique ivory buckles for the prize";
@@ -20,7 +20,7 @@ public class Pangrams {
 
         Set<Integer> alphabeth = new HashSet<Integer>();
         s = s.toUpperCase();
-        for (int i = 0; i < s.length() ; i++) {
+        for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) != 32) {
                 alphabeth.add(new Integer(s.charAt(i)));
             }
@@ -29,8 +29,7 @@ public class Pangrams {
         if (alphabeth.size() == 26) {
             System.out.println("pangram");
 
-        }
-        else if (alphabeth.size() < 26) {
+        } else if (alphabeth.size() < 26) {
             System.out.println("not pangram");
         }
 
