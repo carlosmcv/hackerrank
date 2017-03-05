@@ -10,8 +10,8 @@ import java.io.*;
  */
 public class HackerRankTest {
 
-    private final InputStream original = System.in;
-    private final PrintStream old = System.out;
+    public final InputStream originalIn = System.in;
+    public final PrintStream originalOut = System.out;
 
     private InputStream inputIn;
     private InputStream expectedOutputIn;
@@ -21,25 +21,33 @@ public class HackerRankTest {
 
     @Before
     public void setUp() {
+        //set output
+        baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
     }
 
     @After
     public void tearDown() {
-        System.setIn(original);
-
+        //reset input
+        System.setIn(originalIn);
+        //reset output
         System.out.flush();
-        System.setOut(old);
+        System.setOut(originalOut);
     }
 
     protected void setInputAndExpectedOutputFiles(String inputResource, String expectedOutputResource) {
+        setInputFile(inputResource);
+        setExpectedOutputFiles(expectedOutputResource);
+    }
+
+    protected void setInputFile(String inputResource) {
         inputIn = classLoader.getResourceAsStream(inputResource);
-        expectedOutputIn = classLoader.getResourceAsStream(expectedOutputResource);
-
-        baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-
         System.setIn(inputIn);
-        System.setOut(ps);
+    }
+
+    protected void setExpectedOutputFiles(String expectedOutputResource) {
+        expectedOutputIn = classLoader.getResourceAsStream(expectedOutputResource);
     }
 
     protected String getExpectedOutputString() throws IOException {
@@ -60,7 +68,7 @@ public class HackerRankTest {
 
             br = new BufferedReader(new InputStreamReader(is));
             while ((line = br.readLine()) != null) {
-                sb.append(line);
+                sb.append(line).append("\n");
             }
 
         } catch (IOException e) {
@@ -75,6 +83,6 @@ public class HackerRankTest {
             }
         }
 
-        return sb.toString();
+        return sb.substring(0,sb.length()-1).toString();
     }
 }
