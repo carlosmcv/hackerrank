@@ -69,4 +69,19 @@ public class TheHuffmanDecoderTest extends HackerRankTest {
         //verify
         assertEquals(getExpectedOutputString(), getProgramOutputString());
     }
+
+    @Test
+    public void testTheHuffmanDecoderZ() throws IOException {
+        //setup
+        setInputAndExpectedOutputFiles(
+                "hackerrank/n26test/thehuffmandecoder_Z_in.txt",
+                "hackerrank/n26test/thehuffmandecoder_Z_out.txt"
+        );
+
+        //execute
+        TheHuffmanDecoder.main(new String[]{});
+
+        //verify
+        assertEquals(getExpectedOutputString(), getProgramOutputString());
+    }
 }
