@@ -40,16 +40,33 @@ public class TheHuffmanDecoderTest extends HackerRankTest {
         assertEquals(getExpectedOutputString(), getProgramOutputString());
     }
 
+    @Test
+    public void testTheHuffmanDecoderX() throws IOException {
+        //setup
+        setInputAndExpectedOutputFiles(
+                "hackerrank/n26test/thehuffmandecoder_X_in.txt",
+                "hackerrank/n26test/thehuffmandecoder_X_out.txt"
+        );
+
+        //execute
+        TheHuffmanDecoder.main(new String[]{});
+
+        //verify
+        assertEquals(getExpectedOutputString(), getProgramOutputString());
+    }
 
     @Test
-    public void testSplit() {
+    public void testTheHuffmanDecoderY() throws IOException {
+        //setup
+        setInputAndExpectedOutputFiles(
+                "hackerrank/n26test/thehuffmandecoder_Y_in.txt",
+                "hackerrank/n26test/thehuffmandecoder_Y_out.txt"
+        );
 
-        String s = "a\t001";
+        //execute
+        TheHuffmanDecoder.main(new String[]{});
 
-        String[] ss = s.split("\t");
-
-        assertEquals("a", ss[0]);
-        assertEquals("001", ss[1]);
-
+        //verify
+        assertEquals(getExpectedOutputString(), getProgramOutputString());
     }
 }
