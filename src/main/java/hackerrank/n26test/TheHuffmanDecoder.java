@@ -8,8 +8,10 @@ public class TheHuffmanDecoder {
 
     private static final String NEWLINE_INPUT = "[newline]";
     private static final char NEWLINE_CHAR = '\n';
+    private static final char ZERO_CHAR = '0';
+    private static final String SEPARATOR = "\t";
 
-    private static String decode(List<String> codes, String encoded) {
+    public static String decode(List<String> codes, String encoded) {
         TreeNode root = new TreeNode();
         StringBuilder result = new StringBuilder();
 
@@ -17,7 +19,7 @@ public class TheHuffmanDecoder {
 
         TreeNode current = root;
         for (char c : encoded.toCharArray()) {
-            if (c == '0')
+            if (c == ZERO_CHAR)
                 current = current.left;
             else current = current.right;
 
@@ -31,25 +33,21 @@ public class TheHuffmanDecoder {
     }
 
     private static void loadTree(List<String> codes, TreeNode root) {
-        TreeNode current;
-        for (String code : codes) {
-            String[] codeMap = code.split("\t");
-            current = root;
-            for (char c : codeMap[1].toCharArray()) {
-                if (c == '0') {
-                    if (current.left == null) {
+        codes.stream().map(c -> c.split(SEPARATOR)).forEach(code -> {
+            TreeNode current = root;
+            for (char c : code[1].toCharArray()) {
+                if (c == ZERO_CHAR) {
+                    if (current.left == null)
                         current.left = new TreeNode();
-                    }
                     current = current.left;
                 } else {
-                    if (current.right == null) {
+                    if (current.right == null)
                         current.right = new TreeNode();
-                    }
                     current = current.right;
                 }
             }
-            current.val = NEWLINE_INPUT.equals(codeMap[0]) ? NEWLINE_CHAR : codeMap[0].charAt(0);
-        }
+            current.val = NEWLINE_INPUT.equals(code[0]) ? NEWLINE_CHAR : code[0].charAt(0);
+        });
     }
 
     private static class TreeNode {
